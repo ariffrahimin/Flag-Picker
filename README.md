@@ -29,4 +29,4 @@ A web app to search for country's flag using the country's name.
 
 ## API
 
-[Rest Country]("https://restcountries.com/")
+[RestCountry](https://restcountries.com/)
