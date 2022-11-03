@@ -7,36 +7,31 @@ const Header = () => {
     const [name, setName] = useState("");
     const [flag, setFlag] = useState("");
 
-    //const queue: Array<string> = ['ariff', 'rahimin'];
-
-
+    //Fetch data from API and assign each data to it
     const fetchData =(x:any)=>{
         fetch(URL + '/' + x)
         .then((res) => res.json())
 
         .then((response) => {
         console.log(response[0].flags.png);
-        setName(response[0].name.common);
+        setName(response[0].name.official);
         setFlag(response[0].flags.png)
         })
         .catch(function (error) {
+          // TODO: Show the OOPS display
             console.log(error);
         })
     }
-
-    const handleSubmit = async (evt:any) => {
+    // After click Search button
+    const handleSubmit =  (evt:any) => {
     evt.preventDefault();
     console.log(country);
-    
-    // await new Promise<void>(resolve => {
-    //     setResult(country)
-    //     resolve();
-    // })
     fetchData(country);
     console.log("test")
 
         
   }
+    // TODO: Error handling
 
 
     return (
@@ -52,9 +47,11 @@ const Header = () => {
           <button type='submit' value = {country}  className=" text-black font-bold py-2 px-4 border border-black rounded ml-4" >Search</button>
         </form>
       </div>
-      <div>
-        <h1>{name}</h1>
-        <img src={flag}/>
+      <hr className='mt-20'/>
+      <div className='text-center bg-zinc-400 ml-1/2 mr-1/2'>
+        <img className='ml-auto mr-auto mt-20' src={flag}/>
+        <h1 className='mt-11'>{name}</h1>
+        
       </div>
 </div>
     )
