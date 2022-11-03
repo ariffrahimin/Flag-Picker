@@ -4,9 +4,6 @@ import Header from './component/Header';
 
 const App = () => {
   
-  
-
-
   return (
     <div className="App">
       < Header />

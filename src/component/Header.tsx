@@ -1,22 +1,44 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const Header = () => {
     
-
+    const URL:any = "https://restcountries.com/v3.1/name/";
     const [country,setCountry] = useState("");
-    const [result, setResult] = useState("");
+    const [name, setName] = useState("");
+    const [flag, setFlag] = useState("");
 
-    const queue:String[] = []
+    //const queue: Array<string> = ['ariff', 'rahimin'];
 
 
-    const handleSubmit = () => {
-        console.log("handleSubmit success");
-        console.log(country);
-        setResult(country)
-        queue.push(result)
-        console.log(queue)
+    const fetchData =(x:any)=>{
+        fetch(URL + '/' + x)
+        .then((res) => res.json())
+
+        .then((response) => {
+        console.log(response[0].flags.png);
+        setName(response[0].name.common);
+        setFlag(response[0].flags.png)
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+    }
+
+    const handleSubmit = async (evt:any) => {
+    evt.preventDefault();
+    console.log(country);
+    
+    // await new Promise<void>(resolve => {
+    //     setResult(country)
+    //     resolve();
+    // })
+    fetchData(country);
+    console.log("test")
+
         
   }
+
+
     return (
       <div>{/* Title */}
       <div className='mt-20'>
@@ -30,11 +52,11 @@ const Header = () => {
           <button type='submit' value = {country}  className=" text-black font-bold py-2 px-4 border border-black rounded ml-4" >Search</button>
         </form>
       </div>
-
-     <div>
-      <h1>HU</h1>
-      <h1>{queue}</h1>
-     </div></div>
+      <div>
+        <h1>{name}</h1>
+        <img src={flag}/>
+      </div>
+</div>
     )
   
 }
