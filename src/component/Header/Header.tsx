@@ -1,17 +1,21 @@
 import axios from 'axios';
 import React, { useState, useRef } from 'react'
+import Toast from '../Toast/Toast';
 
 const Header = () => {
     
     const URL:any = "https://restcountries.com/v3.1/name/";
     const [name, setName] = useState("");
     const [flag, setFlag] = useState("");
+    const [status, setStatus] = useState("normal");
     const second:any = useRef();
 
     //Fetch data from API and assign each data to it
     const fetchData =(x:any)=>{
+      if (x != ""){
+        setStatus("normal")
         axios.get(URL + '/' + x)
-        .then((res) => {console.log(res.data)
+        .then((res) => {
         setName(res.data[0].name.official);
         setFlag(res.data[0].flags.png)
         })
@@ -20,7 +24,11 @@ const Header = () => {
             setFlag("https://t3.ftcdn.net/jpg/01/01/89/46/360_F_101894688_RVSZUtDfPR6Cr5eBDQI7Qo5pZ01jmyK3.jpg")
             setName("The Country that you entered, does not exist, Please try other country")
         })
+      }else{
+        setStatus("empty");
+      }
     }
+
     // After click Search button
     const handleSubmit =  (evt:any) => {
     evt.preventDefault();
@@ -31,6 +39,14 @@ const Header = () => {
   console.count("render")
     return (
       <div>{/* Title */}
+      {status == "empty"?(
+        <div>
+          <Toast/>
+        </div>
+      ):(
+        <div>
+        </div>
+      )}
       <div className='mt-20'>
         
         <h1 className= 'text-5xl text-center pt-12'>FlagPicker</h1>
@@ -53,6 +69,7 @@ const Header = () => {
         
         
       </div>)}
+      
 </div>
     )
   
