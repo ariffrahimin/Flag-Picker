@@ -1,10 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 const Toast = () => {
-    const [status, setStatus]=useState("");
-    const childeToParent=()=>{
 
-    }
   return (
     <div id="toast-danger" data-testid="toast" className=" animate-bounce ease-in-out flex items-center p-4 mb-4 w-full max-w-xs text-gray-500 bg-red-200 rounded-lg shadow dark:text-gray-400 dark:bg-gray-800" role="alert">
     <div className="inline-flex flex-shrink-0 justify-center items-center w-8 h-8 text-red-500 bg-red-100 rounded-lg dark:bg-red-800 dark:text-red-200">

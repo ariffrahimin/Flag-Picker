@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { default as axios } from 'axios';
 import React, { useState, useRef } from 'react'
 import Toast from '../Toast/Toast';
 
@@ -12,7 +12,7 @@ const Header = () => {
 
     //Fetch data from API and assign each data to it
     const fetchData =(x:any)=>{
-      if (x != ""){
+      if (x !== ""){
         setStatus("normal")
         axios.get(URL + '/' + x)
         .then((res) => {
@@ -39,7 +39,7 @@ const Header = () => {
   console.count("render")
     return (
       <div>{/* Title */}
-      {status == "empty"?(
+      {status === "empty"?(
         <div>
           <Toast/>
         </div>
