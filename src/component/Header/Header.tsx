@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState, useRef } from 'react'
 
 const Header = () => {
@@ -9,11 +10,10 @@ const Header = () => {
 
     //Fetch data from API and assign each data to it
     const fetchData =(x:any)=>{
-        fetch(URL + '/' + x)
-        .then((res) => res.json())
-        .then((response) => {
-        setName(response[0].name.official);
-        setFlag(response[0].flags.png)
+        axios.get(URL + '/' + x)
+        .then((res) => {console.log(res.data)
+        setName(res.data[0].name.official);
+        setFlag(res.data[0].flags.png)
         })
         .catch(function (error) {
             console.log(error);
